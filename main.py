@@ -4,6 +4,9 @@ import pytz
 from _datetime import datetime
 
 
+bot = telebot.TeleBot("687132824:AAHKfMpTdH-0RZkxSXEgmX5_8j2VdzXY60s")
+
+
 class Message:
     def __init__(self, text="", time=datetime.now()):
         self.__text=text
@@ -34,9 +37,9 @@ class DailyPlanPoint:
 
 
 class DailyPlan:
-        list = [DailyPlanPoint("Good morning!", 2),
-                DailyPlanPoint("I am OK!", 4),
-                DailyPlanPoint("Good night!", 3)]
+        list = [DailyPlanPoint("Good morning!", 9),
+                DailyPlanPoint("I am OK!", 21),
+                DailyPlanPoint("Good night!", 22)]
 
 
 def start():
@@ -47,17 +50,6 @@ def start():
 
     plan = DailyPlan()
     while True:
-        #
-        # if (last_message.time.day < datetime.now().day):
-        #     if (datetime.now().astimezone(tz).hour > 10):
-        #         last_message = Message(last_message.text)
-        #         bot.send_message(chat_id, last_message.text)
-
-        # every minute
-        # if last_message.time.minute < datetime.now().minute:
-        #     last_message = Message(last_message.text, datetime.now())
-        #     bot.send_message(chat_id, last_message.text)
-
         if last_message.time.day != datetime.now().day:
             plan = DailyPlan()
             print("New day "+str(datetime.now()))
@@ -69,7 +61,6 @@ def start():
                 last_message = Message(p.message)
 
 
-bot = telebot.TeleBot("687132824:AAHKfMpTdH-0RZkxSXEgmX5_8j2VdzXY60s")
 start()
 bot.polling(none_stop=True, interval=0)
 
