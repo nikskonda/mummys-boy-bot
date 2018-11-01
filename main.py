@@ -40,6 +40,7 @@ class DailyPlan:
 
 
 def start():
+    print("Start " + str(datetime.now()))
     last_message = Message()
     chat_id = 399575400
     tz = pytz.timezone("Europe/Minsk")
@@ -59,10 +60,12 @@ def start():
 
         if last_message.time.day != datetime.now().day:
             plan = DailyPlan()
+            print("New day "+str(datetime.now()))
         for p in plan.list:
-            if (not p.status) and (p.hour <= datetime.now().astimezone(tz).minute):
+            if (not p.status) and (p.hour <= datetime.now().astimezone(tz).hour):
                 p.status = True
                 bot.send_message(chat_id, p.message)
+                print('"' + p.message + '" was send in ' + str(datetime.now()))
                 last_message = Message(p.message)
 
 
